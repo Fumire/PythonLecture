@@ -7,6 +7,7 @@
 
 \usepackage{graphics, graphicx}
 \usepackage{booktabs}
+\usepackage{url}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg,.gif}
 
 \title{Linux Beginner Guide}
@@ -27,4 +28,106 @@
 	\begin{frame}
 		\titlepage
 	\end{frame}
+
+	\begin{frame}
+		\frametitle{Introduction}
+		
+		In this guide, I assume that followings are already installed:
+		\begin{enumerate}
+			\item Ubuntu 16.04.2 or Higher
+			\item ZSH 5.0.2 or Higher
+			\item VIM 8.1 or Higher
+			\item Python 3
+			\item We will connect to server via SSH
+		\end{enumerate}
+	
+		Also, you should be familiar with Linux system. 
+		
+		If not so, you should start at here: \url{https://github.com/Fumire/LinuxLecture/releases/tag/200105}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Overview}
+		\tableofcontents
+	\end{frame}
+
+	\section{Python?}
+	\begin{frame}
+		\frametitle{Python?}
+		
+		\begin{figure}
+			\centering
+			\includegraphics[width=0.2 \linewidth]{figures/python.png}
+			\caption{Logo of Python}
+		\end{figure}
+	
+		Python is an \textit{interpreted} programming language, created by Guido van Rossum in 1991. 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Interpreted?}
+		
+		Interpreted is opposed \textit{compiled}.
+		
+		Complied programming language is required compiling(translating) before its running. 
+		
+		Interpreted programming language does not require compiling; it can run by read code one-by-one line. 
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{How to run Python?}
+		There are two ways to run Python
+		\begin{figure}
+			\centering
+			$\begin{array}{cc}
+				\includegraphics[width=0.4 \linewidth]{figures/run1.png}
+				&
+				\includegraphics[width=0.4 \linewidth]{figures/run2.png}
+				\\
+				
+				\mbox{(a) Python Interpreter} & \mbox{(b) Python Script} \\
+			\end{array}$
+		\end{figure}
+	
+		We will prefer (b) Python Script for better reproducibility. 
+	\end{frame}
+	
+	\section{Basic IO}
+	\begin{frame}
+		\frametitle{print()}
+		\begin{example}
+			print("Hello world")
+		\end{example}
+		This example will print as:
+		\begin{example}
+			Hello world
+		\end{example}
+		Try with other strings!
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{input()}
+		\begin{example}
+			s = input("Write:") \\
+			print(s)
+		\end{example}
+		input() accepts input as string.
+		
+		Also, in this example, \textit{variable} is used; we will talk about that later. 
+	\end{frame}
+	
+	\section{Data Types}
+	\begin{frame}
+		\frametitle{int Type}
+	\end{frame}
+		
+	\section{Advanced IO}
+	
+	\section{IF, FOR, and WHILE}
+
+	\section{Funtion}
+	
+	\section{Handling Exception}
+	
+	\section{Module}
 \end{document}
