@@ -8,9 +8,29 @@
 \usepackage{graphics, graphicx}
 \usepackage{booktabs}
 \usepackage{url}
+\usepackage{xcolor}
+\usepackage{listings}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg,.gif}
 
-\title{Linux Beginner Guide}
+\lstdefinestyle{pythonstyle}{
+	basicstyle=\ttfamily\footnotesize,
+	breaklines=true,
+	columns=fullflexible,
+	keepspaces=true,
+	showstringspaces=false
+}
+
+\lstdefinestyle{shellstyle}{
+	basicstyle=\ttfamily\footnotesize,
+	breaklines=true,
+	columns=fullflexible,
+	keepspaces=true,
+	showstringspaces=false
+}
+\lstset{style=pythonstyle}
+
+\title{Python Beginner Guide}
+\subtitle{2026 Class Setup}
 
 \author{Jaewoong Lee}
 
@@ -22,7 +42,7 @@
 	\textit{jwlee230@unist.ac.kr}
 }
 
-\date{\today}
+\date{2026 Class}
 
 \begin{document}
 	\begin{frame}
@@ -31,19 +51,34 @@
 
 	\begin{frame}
 		\frametitle{Introduction}
-		
-		In this guide, I assume that followings are already installed:
+
+		This guide assumes the 2026 class environment:
 		\begin{enumerate}
-			\item Ubuntu 16.04.2 or Higher
-			\item ZSH 5.0.2 or Higher
-			\item VIM 8.1 or Higher
-			\item Python 3
-			\item We will connect to server via SSH
+			\item A terminal on a course computer, local laptop, or remote server
+			\item Python 3.14.5 selected for this repository
+			\item A text editor for writing \texttt{.py} files
+			\item Basic shell commands such as \texttt{cd}, \texttt{ls}, and \texttt{mkdir}
 		\end{enumerate}
-	
-		Also, you should be familiar with Linux system. 
-		
-		If not so, you should start at here: \url{https://github.com/Fumire/LinuxLecture/releases/tag/200105}
+
+		The repository includes \texttt{.python-version} so pyenv-compatible
+		setups can select the same Python version automatically.
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Class Python Setup}
+
+		Check the interpreter before running examples:
+		\begin{lstlisting}[style=shellstyle]
+python3 --version
+		\end{lstlisting}
+
+		For this class, the expected version is:
+		\begin{lstlisting}[style=shellstyle]
+Python 3.14.5
+		\end{lstlisting}
+
+		The examples use \texttt{python3}. If your pyenv setup also makes
+		\texttt{python} point to Python 3.14.5, that command is fine too.
 	\end{frame}
 
 	\begin{frame}
@@ -54,197 +89,506 @@
 	\section{Python?}
 	\begin{frame}
 		\frametitle{Python?}
-		
+
 		\begin{figure}
 			\centering
 			\includegraphics[width=0.2 \linewidth]{figures/python.png}
 			\caption{Logo of Python}
 		\end{figure}
-	
-		Python is an \textit{interpreted} programming language, created by Guido van Rossum in 1991. 
+
+		Python is an interpreted, high-level programming language created by
+		Guido van Rossum. It is widely used for automation, data analysis, web
+		services, scientific computing, and teaching programming.
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Interpreted?}
-		
-		Interpreted is opposed \textit{compiled}.
-		
-		Complied programming language is required compiling(translating) before its running. 
-		
-		Interpreted programming language does not require compiling; it can run by read code one-by-one line. 
+
+		A compiled language is usually translated into an executable file before
+		you run it.
+
+		\medskip
+
+		An interpreted language is run by another program called an
+		\textit{interpreter}. In class, the interpreter is the \texttt{python3}
+		program.
+
+		\medskip
+
+		Python still creates bytecode internally, but beginners normally run code
+		by giving a \texttt{.py} file to the interpreter.
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{How to run Python?}
-		There are two ways to run Python
+		\frametitle{How to Run Python?}
+		There are two common ways to run Python:
 		\begin{figure}
 			\centering
 			$\begin{array}{cc}
-				\includegraphics[width=0.4 \linewidth]{figures/run1.png}
+				\includegraphics[width=0.45 \linewidth]{figures/run1.png}
 				&
-				\includegraphics[width=0.4 \linewidth]{figures/run2.png}
+				\includegraphics[width=0.45 \linewidth]{figures/run2.png}
 				\\
-				
-				\mbox{(a) Python Interpreter} & \mbox{(b) Python Script} \\
+
+				\mbox{(a) Python interpreter} & \mbox{(b) Python script} \\
 			\end{array}$
 		\end{figure}
-	
-		We will prefer (b) Python Script for better reproducibility. 
+
+		We will prefer scripts because a file can be saved, reviewed, rerun, and
+		shared.
 	\end{frame}
-	
-	\section{Basic IO}
-	\begin{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{First Script}
+
+		Create a file named \texttt{hello.py}:
+		\begin{lstlisting}
+print("Hello world")
+		\end{lstlisting}
+
+		Run it from the same directory:
+		\begin{lstlisting}[style=shellstyle]
+python3 hello.py
+		\end{lstlisting}
+
+		The terminal prints:
+		\begin{lstlisting}[style=shellstyle]
+Hello world
+		\end{lstlisting}
+	\end{frame}
+
+	\section{Basic I/O}
+	\begin{frame}[fragile]
 		\frametitle{print()}
-		\begin{example}
-			print("Hello world")
-		\end{example}
-		This example will print as:
-		\begin{example}
-			Hello world
-		\end{example}
-		Try with other strings!
+
+		\texttt{print()} writes values to the terminal.
+		\begin{lstlisting}
+print("Hello world")
+print("The answer is", 42)
+		\end{lstlisting}
+
+		The output is:
+		\begin{lstlisting}[style=shellstyle]
+Hello world
+The answer is 42
+		\end{lstlisting}
+
+		Try with other strings and numbers.
 	\end{frame}
 
-	\begin{frame}
+	\begin{frame}[fragile]
 		\frametitle{input()}
-		\begin{example}
-			s = input("Write:") \\
-			print(s)
-		\end{example}
-		input() accepts input as string.
-		
-		Also, in this example, \textit{variable} is used; we will talk about that later. 
+
+		\texttt{input()} waits for the user and returns a string.
+		\begin{lstlisting}
+name = input("Name: ")
+print("Hello,", name)
+		\end{lstlisting}
+
+		Example run:
+		\begin{lstlisting}[style=shellstyle]
+Name: Ada
+Hello, Ada
+		\end{lstlisting}
+
+		Use \texttt{int()} or \texttt{float()} when text input should become a
+		number.
 	\end{frame}
-	
+
+	\begin{frame}[fragile]
+		\frametitle{Variables}
+
+		A variable name points to a value.
+		\begin{lstlisting}
+count = 3
+price = 2.5
+message = "samples"
+
+print(count, message)
+print(count * price)
+		\end{lstlisting}
+
+		You do not declare the type first. Python reads the value and keeps track
+		of the type at runtime.
+	\end{frame}
+
 	\section{Data Types}
-	\begin{frame}
+	\begin{frame}[fragile]
 		\frametitle{int Type}
-		\textit{int} type means integer. You can obviously use integers in Python.
-		\begin{example}
-			print(123) \\
-			print(-321) \\
-			print(0)
-		\end{example}
-		Also, you can use octal and hexadecimal integers as:
-		\begin{example}
-			print(0o123) \\
-			print(0xABC)
-		\end{example}
+
+		\texttt{int} means integer. You can use positive numbers, negative
+		numbers, and zero.
+		\begin{lstlisting}
+print(123)
+print(-321)
+print(0)
+		\end{lstlisting}
+
+		You can also write binary, octal, and hexadecimal integers:
+		\begin{lstlisting}
+print(0b1010)
+print(0o123)
+print(0xABC)
+		\end{lstlisting}
 	\end{frame}
 
-	\begin{frame}
+	\begin{frame}[fragile]
 		\frametitle{float Type}
-		\textit{float} type means decimals.
-		\begin{example}
-			print(1.23) \\
-			print(-.3.21)
-		\end{example}
-		Also, you can express decimals as:
-		\begin{example}
-			print(1.23e45) \\
-			print(6.78E-9)
-		\end{example}
-		Those mean $1.23 \times 10^{45}$ and $6.78 \times 10^{-9}$, respectively.
+
+		\texttt{float} means a decimal number.
+		\begin{lstlisting}
+print(1.23)
+print(-3.21)
+print(0.0)
+		\end{lstlisting}
+
+		Scientific notation is useful for very large or very small numbers:
+		\begin{lstlisting}
+print(1.23e45)
+print(6.78E-9)
+		\end{lstlisting}
+
+		Those mean $1.23 \times 10^{45}$ and $6.78 \times 10^{-9}$.
 	\end{frame}
 
-	\begin{frame}
+	\begin{frame}[fragile]
+		\frametitle{str Type}
+
+		\texttt{str} means string, or text.
+		\begin{lstlisting}
+course = "Python"
+year = "2026"
+
+print(course)
+print(course + " " + year)
+print(len(course))
+		\end{lstlisting}
+
+		Use quotes around string values. Both single quotes and double quotes are
+		valid; choose one style and use it consistently.
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{bool Type and Comparisons}
+
+		\texttt{bool} means \texttt{True} or \texttt{False}.
+		Comparisons produce boolean values.
+		\begin{lstlisting}
+score = 82
+
+print(score >= 60)
+print(score == 100)
+print(score != 0)
+		\end{lstlisting}
+
+		Common comparison operators are \texttt{==}, \texttt{!=}, \texttt{<},
+		\texttt{<=}, \texttt{>}, and \texttt{>=}.
+	\end{frame}
+
+	\begin{frame}[fragile]
 		\frametitle{Arithmetic Operators}
-		You might know how to express arithmetic operators in programming.
+
+		You can express arithmetic directly in Python.
+		\begin{lstlisting}
+print(3 + 4)
+print(3 - 4)
+print(3 * 4)
+print(3 / 4)
+		\end{lstlisting}
+
+		These are equivalent to:
 		\begin{example}
-			print(3 + 4) \\
-			print(3 - 4) \\
-			print(3 * 4) \\
-			print(3 / 4) 
-		\end{example}
-	
-		is equivalent with
-		
-		\begin{example}
-			3 + 4 \\
-			3 - 4 \\
-			3 $\times$ 4 \\
-			3 $\div$ 4
+			$3 + 4$ \\
+			$3 - 4$ \\
+			$3 \times 4$ \\
+			$3 \div 4$
 		\end{example}
 	\end{frame}
 
-	\begin{frame}
-		\frametitle{Power Operator}
-		There is power operator in Python.
-		\begin{example}
-			print(3 ** 4)
-		\end{example}
-		will return as
-		\begin{example}
-			$3^4$ = 81
-		\end{example}
+	\begin{frame}[fragile]
+		\frametitle{Power, Remainder, and Quotient}
+
+		\begin{lstlisting}
+print(3 ** 4)   # power: 81
+print(15 % 4)   # remainder: 3
+print(15 / 4)   # normal division: 3.75
+print(15 // 4)  # floor division: 3
+		\end{lstlisting}
+
+		Use \texttt{//} when you need an integer-like quotient. Use \texttt{\%}
+		when you need the remainder after division.
 	\end{frame}
 
-	\begin{frame}
-		\frametitle{Remainder Operator}
-		The '\%' operator results remainder.
-		
-		\begin{example}
-			print(15 \% 4)
-		\end{example}
-	
-		The example will print '3'.
-	\end{frame}
-
-	\begin{frame}
-		\frametitle{Quotient Operator}
-		The '//' opertor results quotient.
-		
-		\begin{example}
-			print(15 / 4)
-			print(15 // 4)
-		\end{example}
-	
-		Compare the difference of above example. 
-	\end{frame}
-
-	\begin{frame}
+	\begin{frame}[fragile]
 		\frametitle{List Type}
-		
-		List type contains other data as \textit{list}.
-		
-		You can declare list as following:
-		\begin{example}
-			nameOfList = [element1, element2, element3, ...]
-		\end{example}
-	
-		Here is an example of list:
-		\begin{example}
-			a = [] \#empty list \\
-			b = [1, 2, 3] \\
-			c = [1, [2, 3], 4] \# list in the list
-		\end{example}
+
+		A list stores multiple values in one variable.
+		\begin{lstlisting}
+empty = []
+numbers = [1, 2, 3]
+mixed = [1, "two", 3.0]
+nested = [1, [2, 3], 4]
+		\end{lstlisting}
+
+		Lists preserve order and can be changed after they are created.
+		\begin{lstlisting}
+numbers.append(4)
+print(numbers)
+print(len(numbers))
+		\end{lstlisting}
 	\end{frame}
 
-	\begin{frame}
+	\begin{frame}[fragile]
 		\frametitle{Indexing}
-		Note that Python counts number \textit{from zero}. \\
-		Thus, there are $n$ indices from zero to $n-1$ in the list which length is $n$.
-		
-		\begin{example}
-			a = [5, 6, 7] \\
-			print(a[0], a[1], a[2]) \# a[3] will occur error!
-		\end{example}
-	
-		You can access each element as the example. 
+
+		Python counts from zero. A list with length $n$ has indices from
+		$0$ to $n-1$.
+		\begin{lstlisting}
+values = [5, 6, 7]
+
+print(values[0])
+print(values[1])
+print(values[2])
+		\end{lstlisting}
+
+		Negative indices count from the end:
+		\begin{lstlisting}
+print(values[-1])
+		\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Slicing}
+
+		A slice selects part of a sequence.
+		\begin{lstlisting}
+values = [10, 20, 30, 40, 50]
+
+print(values[1:4])   # [20, 30, 40]
+print(values[:3])    # [10, 20, 30]
+print(values[3:])    # [40, 50]
+print(values[::2])   # [10, 30, 50]
+		\end{lstlisting}
+
+		The stop index is not included. \texttt{values[1:4]} means index 1,
+		index 2, and index 3.
+	\end{frame}
+
+	\section{File I/O}
+	\begin{frame}[fragile]
+		\frametitle{Reading a File}
+
+		Use \texttt{with open(...)} so Python closes the file automatically.
+		\begin{lstlisting}
+with open("names.txt", "r", encoding="utf-8") as handle:
+    for line in handle:
+        print(line.strip())
+		\end{lstlisting}
+
+		\texttt{line.strip()} removes the newline character at the end of each
+		line.
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Writing a File}
+
+		Mode \texttt{"w"} creates a file or replaces an existing file.
+		\begin{lstlisting}
+with open("result.csv", "w", encoding="utf-8") as handle:
+    handle.write("sample,count\n")
+    handle.write("A,3\n")
+    handle.write("B,5\n")
+		\end{lstlisting}
+
+		Use mode \texttt{"a"} when you want to append to the end of an existing
+		file.
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Slicing}
-		
+		\frametitle{Working Directory}
+
+		Relative paths are interpreted from the current working directory, not
+		necessarily from the directory where the script is saved.
+
+		\medskip
+
+		In class, keep scripts and practice files in one folder, then run:
+		\begin{example}
+			\texttt{python3 script.py}
+		\end{example}
+
+		from that folder. This makes file examples predictable.
 	\end{frame}
 
-	\section{Advanced IO}
-	
-	\section{IF, FOR, and WHILE}
+	\section{if, for, and while}
+	\begin{frame}[fragile]
+		\frametitle{if Statements}
 
-	\section{Funtion}
-	
-	\section{Handling Exception}
-	
-	\section{Module}
+		Use \texttt{if}, \texttt{elif}, and \texttt{else} to choose a path.
+		\begin{lstlisting}
+score = int(input("Score: "))
+
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+else:
+    print("Keep practicing")
+		\end{lstlisting}
+
+		Indentation is part of Python syntax.
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{for Loops}
+
+		A \texttt{for} loop repeats once for each item in a sequence.
+		\begin{lstlisting}
+names = ["Ada", "Grace", "Guido"]
+
+for name in names:
+    print("Hello,", name)
+		\end{lstlisting}
+
+		Use \texttt{range()} when you need repeated numbers:
+		\begin{lstlisting}
+for i in range(3):
+    print(i)
+		\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{while Loops}
+
+		A \texttt{while} loop repeats while a condition is true.
+		\begin{lstlisting}
+count = 3
+
+while count > 0:
+    print(count)
+    count = count - 1
+
+print("Go")
+		\end{lstlisting}
+
+		Make sure something inside the loop changes the condition, otherwise the
+		loop may never stop.
+	\end{frame}
+
+	\section{Functions}
+	\begin{frame}[fragile]
+		\frametitle{Defining Functions}
+
+		A function packages reusable code behind a name.
+		\begin{lstlisting}
+def greet(name):
+    print("Hello,", name)
+
+greet("Ada")
+greet("Grace")
+		\end{lstlisting}
+
+		Function names should describe the action they perform.
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{return Values}
+
+		Use \texttt{return} when the function should give a value back.
+		\begin{lstlisting}
+def celsius_to_fahrenheit(celsius):
+    return celsius * 9 / 5 + 32
+
+temperature = celsius_to_fahrenheit(25)
+print(temperature)
+		\end{lstlisting}
+
+		Printing and returning are different. Returning lets the caller keep
+		using the result.
+	\end{frame}
+
+	\section{Handling Exceptions}
+	\begin{frame}[fragile]
+		\frametitle{Exceptions}
+
+		An exception means Python found a problem while running the program.
+		\begin{lstlisting}
+number = int("hello")
+		\end{lstlisting}
+
+		This raises \texttt{ValueError} because the string is not an integer.
+
+		\medskip
+
+		When you see a traceback, start by reading the last line. It usually says
+		the exception type and the immediate problem.
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{try and except}
+
+		Use \texttt{try} and \texttt{except} when a failure is expected and you
+		can recover from it.
+		\begin{lstlisting}
+text = input("Count: ")
+
+try:
+    count = int(text)
+    print(count * 2)
+except ValueError:
+    print("Please type an integer.")
+		\end{lstlisting}
+
+		Catch specific exceptions so real bugs are still visible.
+	\end{frame}
+
+	\section{Modules}
+	\begin{frame}[fragile]
+		\frametitle{Importing Modules}
+
+		A module is a file or package that provides Python code you can reuse.
+		\begin{lstlisting}
+import math
+
+print(math.sqrt(9))
+print(math.pi)
+		\end{lstlisting}
+
+		The Python standard library is installed with Python, so many useful
+		modules require no extra installation.
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Writing Your Own Module}
+
+		Save helper functions in one file:
+		\begin{lstlisting}
+# tools.py
+def square(x):
+    return x * x
+		\end{lstlisting}
+
+		Import them from another file in the same folder:
+		\begin{lstlisting}
+# main.py
+from tools import square
+
+print(square(5))
+		\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Practice Exercise}
+
+		Write \texttt{temperature.py}.
+		\begin{enumerate}
+			\item Ask the user for a Celsius temperature.
+			\item Convert the input to \texttt{float}.
+			\item Print the Fahrenheit temperature.
+			\item If the input is not a number, print a helpful message.
+		\end{enumerate}
+
+		This exercise uses input, variables, arithmetic, functions, and exception
+		handling together.
+	\end{frame}
 \end{document}

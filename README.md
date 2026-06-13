@@ -10,23 +10,27 @@ The repository includes both the source deck (`python.tex`) and a generated PDF
 
 The current deck covers:
 
+- The 2026 class Python setup and script-based workflow
 - What Python is and how interpreted languages differ from compiled languages
-- Running Python through an interpreter or as a script
 - Basic input and output with `print()` and `input()`
 - Core data types and operators:
   - integers
   - floating-point numbers
+  - strings
+  - booleans and comparisons
   - arithmetic operators
   - lists
   - indexing
-
-The source also contains section placeholders for advanced I/O, control flow,
-functions, exception handling, and modules.
+  - slicing
+- File I/O with `with open(...)`
+- Control flow with `if`, `for`, and `while`
+- Functions, exception handling, and modules
 
 ## Files
 
 | Path | Description |
 | --- | --- |
+| `.python-version` | Python version pin for the 2026 class examples. |
 | `python.tex` | Main LaTeX Beamer source file for the lecture slides. |
 | `python.pdf` | Generated slide deck. |
 | `figures/python.png` | Python logo used in the introduction. |
@@ -35,6 +39,10 @@ functions, exception handling, and modules.
 | `LICENSE` | Project license. |
 
 ## Requirements
+
+The classroom examples assume Python 3.14.5. The repository includes
+`.python-version` so pyenv-compatible setups can select that version for the
+project.
 
 To rebuild the PDF, install a LaTeX distribution that includes Beamer. On macOS,
 MacTeX provides the required tools.
